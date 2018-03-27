@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block page_content %}
+
+    <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+            <th>体检项目ID</th>
+            <th>健康状态</th>
+            <th>建议</th>
+            <th>风险描述</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        {% for d in data %}
+            <tr>
+                <td>{{ d.dic_code }}</td>
+                <td>{{ tone_map[d.tone_id] }}</td>
+                <td>{{ d.suggest }}</td>
+                <td>{{ d.risk }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ url_for('dict_cmp_conduct.update',id=d.id) }}">更新</a>
+                    <a class="btn btn-danger" href="{{ url_for('dict_cmp_conduct.delete',id=d.id) }}">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+    <a class="btn btn-primary col-md-4" href="{{ url_for('dict_cmp_conduct.create') }}">新增</a>
+{% endblock %}

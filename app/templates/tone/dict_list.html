@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block page_content %}
+
+    <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+            <th>体检项目ID</th>
+            <th>健康级别</th>
+            <th>范围下限</th>
+            <th>范围上限</th>
+            <th>权值</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        {% for d in data %}
+            <tr>
+                <td>{{ d.dic_code }}</td>
+                <td>{{ d.summary }}</td>
+                <td>{{ d.lower_scope }}</td>
+                <td>{{ d.upper_scope }}</td>
+                <td>{{ d.val }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ url_for('tone.update',id=d.tone_id) }}">更新</a>
+                    <a class="btn btn-danger" href="{{ url_for('tone.delete',id=d.tone_id) }}">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+    <a class="btn btn-primary col-md-4" href="{{ url_for('tone.create') }}">新增</a>
+{% endblock %}
